@@ -21,13 +21,32 @@ CREATE TABLE Orders(
 );
 
 CREATE TABLE OrderDetails(
+    order_details_id PRIMARY KEY,
     order_id INTEGER,
     product_id INTEGER,
     qty INTEGER CHECK (qty>0),
     constraint fk_b FOREIGN KEY (product_id) REFERENCES Products(product_id),
     constraint fk_c FOREIGN KEY (order_id) REFERENCES Orders(order_id),
-    constraint pk_a PRIMARY KEY(order_id,product_id)
 );
 
+-- Inserting products
+INSERT INTO Products (product_id, product_name, price, qty) VALUES
+(1, 'Laptop', 999, 10),
+(2, 'Smartphone', 499, 20);
+
+-- Inserting customers
+INSERT INTO Customers (customer_id, customer_name, email, phone) VALUES
+(1, 'John', 'john@example.com', '+919765544329'),
+(2,  'Smith', 'smith@gmail.com', '+919082345674');
+
+-- Inserting orders
+INSERT INTO Orders (order_id, customer_id,order_date, order_amt) VALUES
+(1, 1,TO_DATE('2025-01-10','YYYY-MM-DD'), 5000),
+(2, 2, TO_DATE('2025-01-09','YYYY-MM-DD'),20000);
+
+-- Inserting order details
+INSERT INTO OrderDetails (order_id, product_id, qty) VALUES
+(1,1,1,50),
+(2,2, 2, 100);
 
 
