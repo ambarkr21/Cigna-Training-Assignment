@@ -50,8 +50,21 @@ INSERT INTO OrderDetails (order_details_id, order_id, product_id, qty) VALUES
 (1, 1, 1, 50),
 (2, 2, 2, 100);
 
-Queries
-    SELECT * 
-    FROM products 
-    WHERE qty <20;
+SELECT * 
+FROM products 
+WHERE qty <20;
+
+SELECT SUM(O.order_amt)
+FROM Customers C
+INNER JOIN Orders O ON C.customer_id = O.customer_id
+GROUP BY C.customer_name;
+
+UPDATE Products P
+SET P.qty = P.qty - (
+    SELECT OD.qty
+    FROM OrderDetails OD
+    WHERE OD.product_id = P.product_id
+)
+WHERE P.product_id IN (SELECT DISTINCT product_id FROM OrderDetails);
+
 https://onecompiler.com/oracle/43zm2ceym
