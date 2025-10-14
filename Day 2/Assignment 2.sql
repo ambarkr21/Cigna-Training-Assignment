@@ -12,7 +12,7 @@ CREATE TABLE Customers(
     phone varchar2(15) NOT NULL
 );
 
-CREATE TABLE Order(
+CREATE TABLE Orders(
     order_id INTEGER PRIMARY KEY,
     customer_id integer,
     order_date DATE DEFAULT SYSDATE,
@@ -23,9 +23,9 @@ CREATE TABLE Order(
 CREATE TABLE OrderDetails(
     order_id INTEGER,
     product_id INTEGER,
-    qty INTEGER,
+    qty INTEGER CHECK (qty>0),
     constraint fk_b FOREIGN KEY (product_id) REFERENCES Products(product_id),
-    constraint fk_c FOREIGN KEY (order_id) REFERENCES Order(order_id),
+    constraint fk_c FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     constraint pk_a PRIMARY KEY(order_id,product_id)
 );
 
