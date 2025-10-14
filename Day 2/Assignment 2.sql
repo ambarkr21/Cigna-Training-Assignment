@@ -49,3 +49,5 @@ INSERT INTO Orders (order_id, customer_id, order_date, order_amt) VALUES
 INSERT INTO OrderDetails (order_details_id, order_id, product_id, qty) VALUES
 (1, 1, 1, 50),
 (2, 2, 2, 100);
+
+https://onecompiler.com/oracle/43zm2ceym
