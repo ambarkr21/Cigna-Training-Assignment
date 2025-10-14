@@ -50,4 +50,8 @@ INSERT INTO OrderDetails (order_details_id, order_id, product_id, qty) VALUES
 (1, 1, 1, 50),
 (2, 2, 2, 100);
 
+Queries
+    SELECT * 
+    FROM products 
+    WHERE qty <20;
 https://onecompiler.com/oracle/43zm2ceym
