@@ -19,7 +19,7 @@ CREATE TABLE Emps(
 INSERT INTO Dept VALUES(10, 'Developer', 'Bangalore');
 INSERT INTO Dept VALUES(20, 'Analyst', 'New Delhi');
 INSERT INTO Dept VALUES(30, 'Tester', 'Hyderabad');
-INSERT INTO Dept VALUES(40, 'HR', 'Chennai');
+INSERT INTO Dept VALUES(40, 'Sales', 'Chennai');
 
 --Inserting values to Employee
 INSERT INTO Emps VALUES(11, 'Rohit', 'App Developer', 4000, 10);
@@ -36,40 +36,40 @@ INSERT INTO Emps VALUES(20, 'Kishan', 'Senior Lead Developer', 2000, 10);
 
 --1. Display employee names along with their department names.
 SELECT E.Ename, D.Dname
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No;
 
 --2. List all employees with their job titles and the location of their department.
 SELECT E.Ename, E.Job, D.Loc
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No;
 
 --3. Display employees who work in the SALES department.
 SELECT E.Ename, E.Job, E.Salary
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No
 WHERE D.Dname = 'SALES';
 
 --4. List all employees along with their department name and location, including departments that have no employees.
 SELECT D.Dname, D.Loc, E.Ename, E.Job
 FROM Dept D
-LEFT JOIN Emp E ON D.Dept_No = E.Dept_No;
+LEFT JOIN Emps E ON D.Dept_No = E.Dept_No;
 
 --5. Display all departments and employees, even if some employees are not assigned to any department.
 SELECT D.Dname, D.Loc, E.Ename, E.Job
 FROM Dept D
-FULL JOIN Emp E ON D.Dept_No = E.Dept_No;
+FULL JOIN Emps E ON D.Dept_No = E.Dept_No;
 
 --6. Show each department name and  total salary paid to its employees.
 SELECT D.Dname, SUM(E.Salary) AS Total_Salary
 FROM Dept D
-JOIN Emp E ON D.Dept_No = E.Dept_No
+JOIN Emps E ON D.Dept_No = E.Dept_No
 GROUP BY D.Dname;
 
 --7. Find departments that have more than 3 employees.  Display dname and no. of employees.
 SELECT D.Dname, COUNT(E.Emp_No) AS Num_Employees
 FROM Dept D
-JOIN Emp E ON D.Dept_No = E.Dept_No
+JOIN Emps E ON D.Dept_No = E.Dept_No
 GROUP BY D.Dname
 HAVING COUNT(E.Emp_No) > 3;
 
@@ -81,7 +81,7 @@ WHERE D.Loc = (SELECT Loc FROM Dept WHERE Dname = 'Accounting');
 
 --9. For each department, display the employee who has the highest salary.
 SELECT E.Ename, E.Salary, D.Dname
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No
 WHERE E.Salary = (
   SELECT MAX(E2. Salary)
@@ -91,7 +91,7 @@ WHERE E.Salary = (
 
 --10. List employees whose salary is greater than the average salary of their department.
 SELECT E.Ename, E.Salary, D.Dname
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No - D.Dept_No
 WHERE E.Salary > (
   SELECT AVG(E2.Salary)
