@@ -6,7 +6,7 @@
   );
   
 --Create Table Employee
-CREATE TABLE Emp(
+CREATE TABLE Emps(
   Emp_No NUMBER PRIMARY KEY,
   Ename VARCHAR2(20),
   Job VARCHAR(30),
@@ -16,24 +16,23 @@ CREATE TABLE Emp(
   );
 
 --Inserting values to Department
-INSERT INTO Dept VALUES(10, 'Accounting', 'BLR');
-INSERT INTO Dept VALUES(20, 'RESEARCH', 'HYD');
-INSERT INTO Dept VALUES(30, 'Sales', 'DEL');
-INSERT INTO Dept VALUES(40, 'Operations', 'MUM');
+INSERT INTO Dept VALUES(10, 'Developer', 'Bangalore');
+INSERT INTO Dept VALUES(20, 'Analyst', 'New Delhi');
+INSERT INTO Dept VALUES(30, 'Tester', 'Hyderabad');
+INSERT INTO Dept VALUES(40, 'HR', 'Chennai');
 
 --Inserting values to Employee
-INSERT INTO Emp VALUES(1011, 'Bob', 'Account Manager', 50000, 10);
-INSERT INTO Emp VALUES(1012, 'Smith', 'Sales Manager', 30000, 30);
-INSERT INTO Emp VALUES(1013, 'Ana', 'Intern', 15000, 20);
-INSERT INTO Emp VALUES(1014, 'Dia', 'Operations Manager', 45000, 40);
-INSERT INTO Emp VALUES(1015, 'Jane', 'Supply Manager', 40000, 40);
-INSERT INTO Emp VALUES(1016, 'Clark', 'Salesman', 18000, 30);
-INSERT INTO Emp VALUES(1017, 'Mark', 'Research Lead', 55000, 20);
-INSERT INTO Emp VALUES(1018, 'Antony', 'Audit Manager', 55000, 10);
-INSERT INTO Emp VALUES(1019, 'Mary', 'Audit Manager', 45000, 10);
-INSERT INTO Emp VALUES(1020, 'Marsha', 'Audit Manager', 35000, 10);
+INSERT INTO Emps VALUES(11, 'Rohit', 'App Developer', 4000, 10);
+INSERT INTO Emps VALUES(12, 'Rahul', 'Junior Tester', 2000, 30);
+INSERT INTO Emps VALUES(13, 'John', 'Lead Analyst', 6700, 20);
+INSERT INTO Emps VALUES(14, 'Jack', 'HRBP', 5000, 40);
+INSERT INTO Emps VALUES(15, 'Ambar', 'Manager', 10000, 40);
+INSERT INTO Emps VALUES(16, 'Ravi', 'Lead Tester', 9000, 30);
+INSERT INTO Emps VALUES(17, 'Ramesh', 'Data Analyst', 7000, 20);
+INSERT INTO Emps VALUES(18, 'Suresh', 'Web Developer', 5000, 10);
+INSERT INTO Emps VALUES(19, 'Ram', 'React Developer', 3000, 10);
+INSERT INTO Emps VALUES(20, 'Kishan', 'Senior Lead Developer', 2000, 10);
 
----------------------------------------------------------QUERY---------------------------------------------------------------
 
 --1. Display employee names along with their department names.
 SELECT E.Ename, D.Dname
@@ -99,43 +98,3 @@ WHERE E.Salary > (
   FROM Emp E2
   WHERE E2.Dept_No = E.Dept_No
   );
-
-----------------------------------------------------------Check Subquery-----------------------------------------------------
---1. Single-row Subquery
-SELECT Ename, Salary 
-FROM Emp 
-WHERE Salary > (SELECT AVG(Salary) FROM Emp);
-
---2. Multi-row Subquery
-SELECT Ename, Dept_No 
-FROM Emp
-WHERE Dept_No IN (SELECT Dept_No FROM Dept WHERE Loc= 'MUM');
-
---3. Multi-column Subquery
-SELECT Emp_No, Ename, Job, Dept_No 
-FROM Emp
-WHERE (Job, Dept_No) IN 
-      (SELECT Job, Dept_No FROM Emp WHERE Emp_No = 1018); 
-
---4. Correlated Subquery
-SELECT E.Ename, E.Salary, E.Dept_No 
-FROM Emp E 
-WHERE E.Salary > (SELECT AVG(Salary) 
-FROM Emp
-WHERE Dept_No = E.Dept_No); 
-
---5. In the WHERE Clause
-SELECT * 
-FROM Emp
-WHERE deptno IN (SELECT deptno FROM DEPT WHERE Loc= 'CHICAGO'); 
-
---6) In the HAVING Claus
- SELECT deptno, AVG(Salary) 
-FROM Emp 
-GROUP BY deptno 
-HAVING AVG(Salary) > (SELECT AVG(Salary) FROM Emp);
-
---7) In the SELECT Clause
-SELECT e.emp_name, 
-       (SELECT dept_name FROM DEPT d WHERE d.deptno = e.deptno) AS department 
-FROM Emp e;
