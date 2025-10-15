@@ -1,9 +1,3 @@
-
----------------------------------------------Employee and Department----------------------------------------------------------------
-
---Create Database
-CREATE DATABASE Office
-
 --Create Table Department
   CREATE TABLE Dept(
   Dept_No NUMBER PRIMARY KEY,
