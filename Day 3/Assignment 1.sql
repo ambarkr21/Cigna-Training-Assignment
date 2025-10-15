@@ -75,7 +75,7 @@ HAVING COUNT(E.Emp_No) > 3;
 
 --8. Display employees who work in the same location as the ACCOUNTING department.
 SELECT E.Ename, D.Loc
-FROM Emp E
+FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No
 WHERE D.Loc = (SELECT Loc FROM Dept WHERE Dname = 'Accounting');
 
@@ -85,7 +85,7 @@ FROM Emps E
 JOIN Dept D ON E.Dept_No = D.Dept_No
 WHERE E.Salary = (
   SELECT MAX(E2. Salary)
-  FROM Emp E2
+  FROM Emps E2
   WHERE E2.Dept_No = E.Dept_No
   );
 
@@ -95,6 +95,6 @@ FROM Emps E
 JOIN Dept D ON E.Dept_No - D.Dept_No
 WHERE E.Salary > (
   SELECT AVG(E2.Salary)
-  FROM Emp E2
+  FROM Emps E2
   WHERE E2.Dept_No = E.Dept_No
   );
