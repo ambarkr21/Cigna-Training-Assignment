@@ -68,15 +68,20 @@ END;
 DECLARE
     TYPE country IS TABLE OF VARCHAR2(50) INDEX BY VARCHAR2(50);
     cnt country;
-    cap VARCHAR2(50);
+    vcount VARCHAR2(50) := '&vcount';
+    vcapital VARCHAR2(50); -- Variable to store the capital
 BEGIN
-    cnt('India'):='New Delhi';
-    cnt('USA'):='Washington DC';
-    cnt('Sri Lanka'):='Colombo';
-    cnt('New Zealand'):='Wellington';
-    cnt('Germany'):='Berlin';
-    cnt('Ireland'):='Dublin';
-    DBMS_OUTPUT.PUT_LINE('Enter the Country Name:');
-    SELECT '&cap' INTO cap FROM DUAL;
-    DBMS_OUTPUT.PUT_LINE('The capital of ' || cap || ' is ' || cnt(cap));
+    cnt('India') := 'New Delhi';
+    cnt('USA') := 'Washington DC';
+    cnt('Sri Lanka') := 'Colombo';
+    cnt('New Zealand') := 'Wellington';
+    cnt('Germany') := 'Berlin';
+    cnt('Ireland') := 'Dublin';
+
+    IF cnt.EXISTS(vcount) THEN
+        vcapital := cnt(vcount); -- Retrieve the capital using the correct key
+        DBMS_OUTPUT.PUT_LINE('The capital of ' || vcount || ' is ' || vcapital); -- Use the correct variables
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('NOT FOUND');
+    END IF;
 END;
