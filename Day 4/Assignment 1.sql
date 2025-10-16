@@ -67,20 +67,20 @@ END;
 --Assignment 5 - Country-Capital Lookup
 DECLARE
     TYPE country IS TABLE OF VARCHAR2(50) INDEX BY VARCHAR2(50);
-    cnt country;
-    vcount VARCHAR2(50) := '&vcount';
-    vcapital VARCHAR2(50); -- Variable to store the capital
+    CountryList country;
+    v_country VARCHAR2(50) := '&v_country';
+    v_capital VARCHAR2(50); -- Variable to store the capital
 BEGIN
-    cnt('India') := 'New Delhi';
-    cnt('USA') := 'Washington DC';
-    cnt('Sri Lanka') := 'Colombo';
-    cnt('New Zealand') := 'Wellington';
-    cnt('Germany') := 'Berlin';
-    cnt('Ireland') := 'Dublin';
+    CountryList('India') := 'New Delhi';
+    CountryList('USA') := 'Washington DC';
+    CountryList('Sri Lanka') := 'Colombo';
+    CountryList('New Zealand') := 'Wellington';
+    CountryList('Germany') := 'Berlin';
+    CountryList('Ireland') := 'Dublin';
 
-    IF cnt.EXISTS(vcount) THEN
-        vcapital := cnt(vcount);
-        DBMS_OUTPUT.PUT_LINE('The capital of ' || vcount || ' is ' || vcapital);
+    IF CountryList.EXISTS(v_country) THEN
+        v_capital := CountryList(vcount);
+        DBMS_OUTPUT.PUT_LINE('The capital of ' || v_country || ' is ' || v_capital);
     ELSE
         DBMS_OUTPUT.PUT_LINE('NOT FOUND');
     END IF;
