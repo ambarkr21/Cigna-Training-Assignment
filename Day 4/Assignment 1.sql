@@ -79,8 +79,8 @@ BEGIN
     cnt('Ireland') := 'Dublin';
 
     IF cnt.EXISTS(vcount) THEN
-        vcapital := cnt(vcount); -- Retrieve the capital using the correct key
-        DBMS_OUTPUT.PUT_LINE('The capital of ' || vcount || ' is ' || vcapital); -- Use the correct variables
+        vcapital := cnt(vcount);
+        DBMS_OUTPUT.PUT_LINE('The capital of ' || vcount || ' is ' || vcapital);
     ELSE
         DBMS_OUTPUT.PUT_LINE('NOT FOUND');
     END IF;
