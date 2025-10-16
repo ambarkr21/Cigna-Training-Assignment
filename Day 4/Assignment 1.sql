@@ -32,12 +32,12 @@ END;
 
 --Assignment 3 - Retrieve and Display Department Details
 DECLARE 
-    vdept Dept%ROWTYPE;
-    did NUMBER;
+    v_dept Dept%ROWTYPE;
+    d_id NUMBER;
 BEGIN
-    did:=20;
-    SELECT * INTO vdept FROM dept WHERE dept_no=did;
-    DBMS_OUTPUT.PUT_LINE(vdept.loc ||' ' || vdept.Dname);
+    d_id:=20;
+    SELECT * INTO v_dept FROM dept WHERE dept_no=d_id;
+    DBMS_OUTPUT.PUT_LINE(v_dept.loc ||' ' || v_dept.Dname);
 END;
 
 --Assignment 4 - Student Marks Management
@@ -45,7 +45,6 @@ DECLARE
     TYPE student IS TABLE OF NUMBER INDEX BY VARCHAR2(20);
     stu student;
     skey VARCHAR2(20);
-    ag NUMBER;
     total NUMBER;
 BEGIN
     stu('John'):=30;
@@ -79,7 +78,7 @@ BEGIN
     CountryList('Ireland') := 'Dublin';
 
     IF CountryList.EXISTS(v_country) THEN
-        v_capital := CountryList(vcount);
+        v_capital := CountryList(v_country);
         DBMS_OUTPUT.PUT_LINE('The capital of ' || v_country || ' is ' || v_capital);
     ELSE
         DBMS_OUTPUT.PUT_LINE('NOT FOUND');
